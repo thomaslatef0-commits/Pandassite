@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" data-theme="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="مختبر بانداس التفاعلي: مسار عربي لتعلّم pandas بالفهم لا بالحفظ، مع محرّك بايثون حقيقي، مقارنات، وتمارين تُصحّح تلقائيًا.">
+  <meta name="theme-color" content="#f5f2e9">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='9' fill='%23ffc531'/%3E%3Ccircle cx='9' cy='9' r='5' fill='%23191b2e'/%3E%3Ccircle cx='23' cy='9' r='5' fill='%23191b2e'/%3E%3Ccircle cx='16' cy='17' r='11' fill='%23fffdf7' stroke='%23191b2e' stroke-width='1.6'/%3E%3Cellipse cx='11.5' cy='16' rx='3.4' ry='4.2' transform='rotate(-16 11.5 16)' fill='%23191b2e'/%3E%3Cellipse cx='20.5' cy='16' rx='3.4' ry='4.2' transform='rotate(16 20.5 16)' fill='%23191b2e'/%3E%3Ccircle cx='12.4' cy='15.4' r='1.1' fill='%23fffdf7'/%3E%3Ccircle cx='19.6' cy='15.4' r='1.1' fill='%23fffdf7'/%3E%3Cellipse cx='16' cy='21' rx='1.7' ry='1.2' fill='%23191b2e'/%3E%3C/svg%3E">
+  <title>مختبر بانداس · تعلّم pandas بالفهم</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&family=Baloo+Bhaijaan+2:wght@500;600;700;800&family=Rubik:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/main.css">
+  <link rel="stylesheet" href="assets/css/arcade.css">
+</head>
+<body>
+  <a class="skip-link" href="#view">تجاوز إلى المحتوى</a>
+  <div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
+
+  <header class="site-header" id="header">
+    <div class="wrap header-inner">
+      <a class="brand" href="#/" aria-label="مختبر بانداس — الرئيسية">
+        <span class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="13" cy="13" r="9" fill="currentColor"/>
+            <circle cx="51" cy="13" r="9" fill="currentColor"/>
+            <circle cx="32" cy="34" r="22" fill="#fffdf7" stroke="currentColor" stroke-width="2.4"/>
+            <ellipse cx="23.5" cy="32" rx="6.6" ry="8.2" transform="rotate(-16 23.5 32)" fill="currentColor"/>
+            <ellipse cx="40.5" cy="32" rx="6.6" ry="8.2" transform="rotate(16 40.5 32)" fill="currentColor"/>
+            <circle cx="25.4" cy="30.6" r="2" fill="#fffdf7"/>
+            <circle cx="38.6" cy="30.6" r="2" fill="#fffdf7"/>
+            <ellipse cx="32" cy="43" rx="3.2" ry="2.2" fill="currentColor"/>
+            <path d="M32 45.2v3.4m0 0c-2.6 0-4.4 1.4-5.2 3m5.2-3c2.6 0 4.4 1.4 5.2 3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+            <circle cx="16" cy="40" r="2.6" fill="#ff8fb1" opacity=".62"/>
+            <circle cx="48" cy="40" r="2.6" fill="#ff8fb1" opacity=".62"/>
+          </svg>
+        </span>
+        <span class="brand-text">
+          <strong>مختبر بانداس</strong>
+          <small>تعلّم بالفهم لا بالحفظ</small>
+        </span>
+      </a>
+
+      <nav class="main-nav" aria-label="التنقل الرئيسي">
+        <a href="#/" data-route="home">الرئيسية</a>
+        <a href="#/cheatsheet" data-route="cheatsheet">المقارنات</a>
+        <a href="#/exam" data-route="exam">الاختبار الشامل</a>
+        <a href="#/lab" data-route="lab">المختبر</a>
+      </nav>
+
+      <div class="header-actions">
+        <div class="hud" aria-label="ملف اللاعب">
+          <button class="hud-btn" id="hudBtn" type="button" aria-haspopup="dialog" title="ملف اللاعب والأوسمة">
+            <span class="hud-ring" id="hudRing" style="--p:0%"><b id="hudLevel">1</b></span>
+            <span class="hud-body">
+              <span class="hud-top"><span class="hud-title" id="hudTitle">مبتدئ البيانات</span><span class="hud-xp" id="hudXp">0 / 120 XP</span></span>
+              <span class="hud-bar"><i id="hudXpFill"></i></span>
+            </span>
+          </button>
+          <span class="hud-chip" id="streakChip" title="سلسلة الأيام"><span aria-hidden="true">🔥</span><b id="streakCount">0</b></span>
+        </div>
+        <button class="search-btn" id="searchBtn" type="button" aria-label="ابحث في الموقع">
+          <span class="sb-icon"></span>
+          <span class="sb-text">ابحث…</span>
+          <kbd>Ctrl K</kbd>
+        </button>
+        <button class="icon-btn sound-btn" id="soundBtn" type="button" aria-label="إيقاف الأصوات" aria-pressed="true"></button>
+        <button class="icon-btn" id="themeBtn" type="button" aria-label="تبديل الوضع"></button>
+        <button class="icon-btn only-mobile" id="menuBtn" type="button" aria-label="القائمة" aria-expanded="false" aria-controls="mobileNav">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="mobile-nav" id="mobileNav" hidden>
+      <a href="#/" data-route="home">الرئيسية</a>
+      <a href="#/cheatsheet" data-route="cheatsheet">المقارنات</a>
+      <a href="#/exam" data-route="exam">الاختبار الشامل</a>
+      <a href="#/lab" data-route="lab">المختبر</a>
+    </div>
+  </header>
+
+  <main id="view"></main>
+
+  <footer class="site-footer">
+    <div class="wrap footer-grid">
+      <div class="footer-brand">
+        <span class="brand-mark small" aria-hidden="true">
+          <svg viewBox="0 0 64 64" fill="none">
+            <circle cx="13" cy="13" r="9" fill="currentColor"/>
+            <circle cx="51" cy="13" r="9" fill="currentColor"/>
+            <circle cx="32" cy="34" r="22" fill="#fffdf7" stroke="currentColor" stroke-width="2.4"/>
+            <ellipse cx="23.5" cy="32" rx="6.6" ry="8.2" transform="rotate(-16 23.5 32)" fill="currentColor"/>
+            <ellipse cx="40.5" cy="32" rx="6.6" ry="8.2" transform="rotate(16 40.5 32)" fill="currentColor"/>
+            <circle cx="25.4" cy="30.6" r="2" fill="#fffdf7"/>
+            <circle cx="38.6" cy="30.6" r="2" fill="#fffdf7"/>
+            <ellipse cx="32" cy="43" rx="3.2" ry="2.2" fill="currentColor"/>
+            <path d="M32 45.2v3.4m0 0c-2.6 0-4.4 1.4-5.2 3m5.2-3c2.6 0 4.4 1.4 5.2 3" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"/>
+            <circle cx="16" cy="40" r="2.6" fill="#ff8fb1" opacity=".62"/>
+            <circle cx="48" cy="40" r="2.6" fill="#ff8fb1" opacity=".62"/>
+          </svg>
+        </span>
+        <div>
+          <strong>مختبر بانداس</strong>
+          <p>موقع تعليمي تفاعلي بالعربية: تعلّم المكتبة بفهم النموذج، لا بحفظ الأوامر.</p>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>المسار</h4>
+        <a href="#/lesson/why-pandas">لماذا pandas؟</a>
+        <a href="#/lesson/selection">loc وiloc</a>
+        <a href="#/lesson/groupby">groupby</a>
+        <a href="#/lesson/io">الاستيراد والتصدير</a>
+      </div>
+      <div class="footer-col">
+        <h4>أدوات</h4>
+        <a href="#/cheatsheet">ورقة المقارنات</a>
+        <a href="#/exam">الاختبار الشامل</a>
+        <a href="#/lab">المختبر</a>
+      </div>
+      <div class="footer-col">
+        <h4>المصدر</h4>
+        <p class="footer-note">مبني على دفتر «pandas للمبتدئين» للأستاذ قصي البطوش، وأُعيد تنظيمه وتوسيعه.</p>
+        <div class="footer-links">
+          <a href="https://github.com/qusaybtoush" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/qusayal-btoush/" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://www.kaggle.com/qusaybtoush1990" target="_blank" rel="noopener">Kaggle</a>
+        </div>
+      </div>
+    </div>
+    <div class="wrap footer-bottom">
+      <span>صُنع للفهم، لا للحفظ.</span>
+      <span class="footer-dot">·</span>
+      <span>كل الكود يعمل داخل متصفحك — لا يُرسل شيء إلى أي خادم.</span>
+    </div>
+  </footer>
+
+  <div class="overlay" id="searchOverlay" hidden>
+    <div class="search-panel" role="dialog" aria-modal="true" aria-label="بحث">
+      <div class="search-row">
+        <span class="si-icon"></span>
+        <input id="searchInput" type="search" placeholder="ابحث عن موضوع، دالة، أو مقارنة…" autocomplete="off" aria-label="نص البحث">
+        <button class="icon-btn small" type="button" data-close-search aria-label="إغلاق البحث">✕</button>
+      </div>
+      <div class="search-results" id="searchResults"></div>
+      <div class="search-foot"><span><kbd>↵</kbd> فتح أول نتيجة</span><span><kbd>Esc</kbd> إغلاق</span></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="assets/js/data/dataset.js"></script>
+  <script src="assets/js/data/lessons-a.js"></script>
+  <script src="assets/js/data/lessons-b.js"></script>
+  <script src="assets/js/data/lessons-c.js"></script>
+  <script src="assets/js/data/lessons-d.js"></script>
+  <script src="assets/js/data/exercises.js"></script>
+  <script src="assets/js/data/quizzes-a.js"></script>
+  <script src="assets/js/data/quizzes-b.js"></script>
+  <script src="assets/js/data/exam.js"></script>
+  <script src="assets/js/data/cheatsheet.js"></script>
+  <script src="assets/js/progress.js"></script>
+  <script src="assets/js/render.js"></script>
+  <script src="assets/js/gamify.js"></script>
+  <script src="assets/js/quiz.js"></script>
+  <script src="assets/js/py.js"></script>
+  <script src="assets/js/app.js"></script>
+</body>
+</html>
